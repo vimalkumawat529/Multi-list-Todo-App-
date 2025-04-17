@@ -76,7 +76,7 @@ const TodoList = ({
                             value={newListName}
                             onChange={(e) => setNewListName(e.target.value)}
                         />
-                        <button onClick={handleRename}>Save</button>
+                        <button className="update-rename" onClick={handleRename}>Update</button>
                     </div>
                 ) : (
                     <h2>{list?.name}</h2>

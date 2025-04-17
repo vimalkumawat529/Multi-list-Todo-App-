@@ -26,13 +26,13 @@ const App = () => {
   // Filter Todo Lists based on search query
   const filteredLists = searchQuery
     ? todoLists
-      .map((list) => {
-        const filteredTasks = list.tasks.filter((task) =>
+      ?.map((list) => {
+        const filteredTasks = list?.tasks?.filter((task) =>
           task.name.toLowerCase().includes(searchQuery)
         );
-        return filteredTasks.length > 0 ? { ...list, tasks: filteredTasks } : null;
+        return filteredTasks?.length > 0 ? { ...list, tasks: filteredTasks } : null;
       })
-      .filter((list) => list !== null)
+      ?.filter((list) => list !== null)
     : todoLists;
 
 

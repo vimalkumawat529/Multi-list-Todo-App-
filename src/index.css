@@ -235,6 +235,22 @@ button:disabled {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.rename-input .update-rename {
+  font-size: 1rem;
+  padding: 4px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.rename-input .update-rename:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(72, 201, 176, 0.8);
+}
+
 .rename-input input:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);

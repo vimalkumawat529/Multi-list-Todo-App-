@@ -22,7 +22,7 @@
 - 🔹 Smooth UI with real-time state management using Redux Toolkit
 
 🌐 Live Demo
-👉 https://680087b9fcf0378bd70bbdee--multilist-todo-app.netlify.app/
+👉 https://multilist-todo-app.netlify.app/
 
 ---
 
