@@ -24,12 +24,17 @@ const App = () => {
   };
 
   // Filter Todo Lists based on search query
-  const filteredLists = todoLists?.map((list) => {
-    const filteredTasks = list?.tasks?.filter((task) =>
-      task.name.toLowerCase().includes(searchQuery)
-    );
-    return { ...list, tasks: filteredTasks };
-  });
+  const filteredLists = searchQuery
+    ? todoLists
+      .map((list) => {
+        const filteredTasks = list.tasks.filter((task) =>
+          task.name.toLowerCase().includes(searchQuery)
+        );
+        return filteredTasks.length > 0 ? { ...list, tasks: filteredTasks } : null;
+      })
+      .filter((list) => list !== null)
+    : todoLists;
+
 
   // Handle Drag-and-Drop functionality
   const handleDropTask = (taskId, fromListId, toListId) => {
@@ -167,6 +172,7 @@ const App = () => {
     }
   };
 
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="app">
@@ -181,7 +187,7 @@ const App = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="search-container">
+        {todoLists.length > 0 && <div className="search-container">
           <input
             type="text"
             value={searchQuery}
@@ -197,23 +203,29 @@ const App = () => {
               ✖
             </button>
           )}
-        </div>
+        </div>}
 
-        {/* Show Filtered Lists */}
+        {/* Lists Rendering */}
         <div className="lists">
-          {filteredLists.map((list) => (
-            <TodoList
-              key={list.id}
-              list={list}
-              onAddTask={handleAddTask}
-              onDeleteTask={handleDeleteTask}
-              onToggleTask={handleToggleTask}
-              onDeleteList={handleDeleteList}
-              onRenameList={handleRenameList}
-              onDropTask={handleDropTask}
-              onReorderTask={handleReorderTask}
-            />
-          ))}
+          {filteredLists?.length > 0 ? (
+            filteredLists.map((list) => (
+              <TodoList
+                key={list.id}
+                list={list}
+                onAddTask={handleAddTask}
+                onDeleteTask={handleDeleteTask}
+                onToggleTask={handleToggleTask}
+                onDeleteList={handleDeleteList}
+                onRenameList={handleRenameList}
+                onDropTask={handleDropTask}
+                onReorderTask={handleReorderTask}
+              />
+            ))
+          ) : searchQuery ? (
+            <p>No tasks found matching "{searchQuery}"</p>
+          ) : (
+            <p>No lists available. Add a list!</p>
+          )}
         </div>
       </div>
     </DndProvider>
